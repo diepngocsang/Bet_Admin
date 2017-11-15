@@ -1,0 +1,33 @@
+$table-font-color: #606c71;
+$table-border-color: #e9ebec;
+
+:host{
+   /deep/ { 
+       *{
+       font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;    
+       }
+
+       table{
+        color: $table-font-color;  
+        tr {
+            td,th{
+               border: 1px solid $table-border-color; 
+            }
+        }
+       }
+       nav.ng2-smart-pagination-nav{
+            padding-top:0.875rem;
+        }
+        .ng2-smart-pagination[_ngcontent-c7]   .page-link-next[_ngcontent-c7], .ng2-smart-pagination[_ngcontent-c7]   .page-link-prev[_ngcontent-c7]{
+            padding-top: 0.8rem;
+        }
+        [_nghost-c7] {
+            justify-content: flex-end;
+        }
+   }
+}
+input.search {
+    margin-bottom: 20px;
+    line-height: normal;
+    padding: .375rem .75rem;
+}

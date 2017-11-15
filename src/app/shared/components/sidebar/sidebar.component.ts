@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
     isActive = false;
     showMenu = '';
+    
     eventCalled() {
         this.isActive = !this.isActive;
     }
@@ -17,5 +18,8 @@ export class SidebarComponent {
         } else {
             this.showMenu = element;
         }
+    }
+    onLoggedout() {
+        localStorage.removeItem('isLoggedin');
     }
 }

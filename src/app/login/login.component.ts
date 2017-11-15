@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { routerTransition } from '../router.animations';
+import { UserService, AlertService } from '../shared/services/index';
 
 @Component({
     selector: 'app-login',
@@ -9,15 +10,39 @@ import { routerTransition } from '../router.animations';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
-
-    constructor(public router: Router) {
+    model: any = {};
+    loading = false;
+    returnUrl: string;
+    error: string="";
+    constructor(private route: ActivatedRoute,
+        private router: Router,
+        private userService: UserService,
+        private alertService: AlertService) {
     }
 
     ngOnInit() {
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    onLoggedin() {
-        localStorage.setItem('isLoggedin', 'true');
+    login() {
+        this.loading = true;
+        this.error="";
+        this.userService.signin(this.model)
+            .then(
+            data => {
+                if (!data) {
+                    this.loading = false;
+                    this.error="You don't have rights to login this site!";
+                }
+                else {
+                    this.router.navigate([this.returnUrl]);
+                }
+            },
+            error => {
+                this.error="You don't have rights to login this site!";
+                this.loading = false;
+            });
     }
 
 }
