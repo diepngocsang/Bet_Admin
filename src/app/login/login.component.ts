@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     returnUrl: string;
-    error: string="";
     constructor(private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
@@ -27,20 +26,19 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        this.error="";
         this.userService.signin(this.model)
             .then(
             data => {
                 if (!data) {
                     this.loading = false;
-                    this.error="You don't have rights to login this site!";
+                    this.alertService.error("You don't have rights to login this site!");
                 }
                 else {
                     this.router.navigate([this.returnUrl]);
                 }
             },
             error => {
-                this.error="You don't have rights to login this site!";
+                this.alertService.error(error);
                 this.loading = false;
             });
     }

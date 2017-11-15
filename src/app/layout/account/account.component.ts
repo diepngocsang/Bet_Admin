@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { LocalDataSource } from 'ng2-smart-table';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
     selector: 'app-account',
@@ -16,94 +17,31 @@ export class AccountComponent implements OnInit {
                 title: 'ID',
                 filter: false
             },
-            name: {
-                title: 'Full Name',
+            firstName: {
+                title: 'First Name',
                 filter: false
             },
-            username: {
-                title: 'User Name',
+            lastName: {
+                title: 'Last Name',
                 filter: false
             },
             email: {
                 title: 'Email',
                 filter: false
+            },
+            emailVerified: {
+                title: 'Email Verified',
+                filter: false
             }
         }
     };
-    data = [
-        {
-            id: 1,
-            name: "Leanne Graham",
-            username: "Bret",
-            email: "Sincere@april.biz"
-        },
-        {
-            id: 2,
-            name: "Ervin Howell",
-            username: "Antonette",
-            email: "Shanna@melissa.tv"
-        },
-        {
-            id: 3,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 4,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 5,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 6,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 7,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 8,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 9,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 10,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        },
-        {
-            id: 11,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        }
-    ];
-    constructor() {
-        this.source = new LocalDataSource(this.data); // create the source
+    data = [];
+    constructor(private userService: UserService) {
+        this.getData();
     }
     ngOnInit() { }
     onSearch(query: string = '') {
-        if (query.length <=0) {
+        if (query.length <= 0) {
             this.source.setFilter([]);
         }
         else {
@@ -114,11 +52,11 @@ export class AccountComponent implements OnInit {
                     search: query
                 },
                 {
-                    field: 'name',
+                    field: 'firstName',
                     search: query
                 },
                 {
-                    field: 'username',
+                    field: 'lastName',
                     search: query
                 },
                 {
@@ -130,5 +68,15 @@ export class AccountComponent implements OnInit {
             // (meaning all columns should contain search query or at least one)
             // 'AND' by default, so changing to 'OR' by setting false here
         }
+    }
+
+    getData() {
+        this.userService.getAllAccount().then(result => {
+            this.data = result.data;
+            this.source = new LocalDataSource(this.data); // create the source
+        },
+            error => {
+
+            });
     }
 }

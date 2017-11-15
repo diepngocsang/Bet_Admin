@@ -7,7 +7,8 @@ export class API {
     private accountsURL = this.baseURL + '/accounts';
     accountAction = {
         LOGIN: this.accountsURL + '/login',
-        LOGOUT: this.accountsURL + '/logout'
+        LOGOUT: this.accountsURL + '/logout',
+        GET_ALL_ACCOUNTS: this.accountsURL
     };
 
     constructor() { }

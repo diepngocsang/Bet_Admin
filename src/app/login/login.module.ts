@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
+import {AlertComponent} from '../shared/components';
 
 @NgModule({
     imports: [
@@ -13,7 +14,7 @@ import { LoginComponent } from './login.component';
         FormsModule,
         HttpModule
     ],
-    declarations: [LoginComponent]
+    declarations: [LoginComponent,AlertComponent]
 })
 export class LoginModule {
 }

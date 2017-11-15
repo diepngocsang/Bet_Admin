@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../services/index';
 
 @Component({
     selector: 'app-sidebar',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
     isActive = false;
     showMenu = '';
-    
+    constructor(private userService:UserService){}
     eventCalled() {
         this.isActive = !this.isActive;
     }
@@ -20,6 +21,6 @@ export class SidebarComponent {
         }
     }
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        this.userService.signout();
     }
 }

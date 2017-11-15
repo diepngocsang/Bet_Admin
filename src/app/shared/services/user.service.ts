@@ -45,10 +45,18 @@ export class UserService {
             .catch(this.handleErrorPromise);
     }
 
+    getAllAccount(){
+        let token = JSON.parse(localStorage.getItem('currentUser')).token;
+        return this.http.get(this.api.accountAction.GET_ALL_ACCOUNTS + '?access_token=' + token, this.options)
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
     private extractData(res: Response) {
         return res.json() || {};
     }
     private handleErrorPromise(error: Response | any) {
-        return Promise.reject(error.message || error);
+        return Promise.reject(error.json().message || error.json());
     }
 }
