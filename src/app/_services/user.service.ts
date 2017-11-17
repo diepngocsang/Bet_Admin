@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { API } from '../config/config';
+import { API } from '../_shared/config/config';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 /*

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/index';
+import { UserService } from '../../_services/index';
 
 @Component({
     selector: 'app-sidebar',

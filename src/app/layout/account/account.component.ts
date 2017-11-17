@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { LocalDataSource } from 'ng2-smart-table';
-import { UserService } from '../../shared/services/user.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
     selector: 'app-account',

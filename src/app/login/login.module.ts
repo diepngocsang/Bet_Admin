@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import {AlertComponent} from '../shared/components';
+import {AlertComponent} from '../_directives/alert/alert.component';
 
 @NgModule({
     imports: [
